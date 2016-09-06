@@ -1,0 +1,170 @@
+mdb disp setmute gfx0 enable
+
+
+PIP test catch log
+If video cannot be played, please capture “Vampdiag setmodl VDEC 0x7” log to know what happens.
+
+If video can be played, please capture “Vampdiag setmodl VMETA 0x1f” and “mdb” log for us.
+mdb sys mc 1
+If GFX is tested (run left_right.sh), please capture “disp_plane_info” for us.
+
+
+
+adb root
+adb connect localhost
+adb disable-verity
+reboot
+
+
+How to use:
+1.       Push busybox into platform (run below command in PC cmd, I suppose you already install adb in system PATH)
+a.       adb connect XXX.XXX.XXX.XXX
+b.       adb remount
+c.       adb push D:\busybox /system/bin              # You can get busybox in http://10.37.132.97:1080/s/iJecqKLvUCaQU3i
+d.       adb chmod 777 /system/bin/busybox
+2.       Create folder in platform for mount (run below command in platform console)
+a.       mkdir -p /mnt/media/stream_server
+3.       Mount server to local (run below command in platform console)
+a.       busybox mount -t nfs -o nolock 10.37.132.97:/projects/lgu_tvg2/streams /mnt/media/stream_server     # If platform connect with US line, you can switch IP 10.37.132.97 to 10.37.142.205
+busybox mount -t nfs -o nolock 10.37.132.132:/lgy20151118/4K /mnt/media/stream_server
+
+ION SHM memory info
+cat /sys/kernel/debug/ion/heaps/*
+cat /sys/kernel/debug/ion/gid
+
+
+
+adb push gtvtools/HDCPRX_Key.store /factory_setting/
+最新dump命令：
+ampclient_alpha 7
+
+video Pre-condition: 
+ Copy folder \\10.37.116.92\Test_Streams\IP_Control_Release\Building_Testing_Scripts\Ver3.5\TestScript\html_result\dtv to your windows environment
+ Copy folder \\10.37.116104\tftpboot\wangcy\ip_control to your USB disc then insert this USB disc to board
+Step:
+Run command in cmd window: python case_main.py –s 8
+Notice:1. when use cmd window, please close your tera term serial port
+       2. -s means your serial port number
+            
+recorder -c filename
+reproduce times filename
+
+TX 输出RX输入
+AC电源DC遥控
+
+logcat  |grep -i edid
+logcat  |grep -i avin
+
+-How to save log to USB disk:
+ 1. Plug USB disk to DUT;
+ 2. Open Console(such as TeraTerm/Putty) which connect to DUT;
+ 3. #logcat -v time > /mnt/media/usb/LogFileName.log & (USB disk path with log file name, you'd better run in background if you want to release your console)
+ 4. If you want to stop logcat which run in background
+     #fg
+     Press Ctrl + C
+
+DMP su
+chmod 777 /factory_setting/*
+scp xugp@10.37.116.141:/tftpboot/berlin_generic-ota-eng.sbt.zip .
+./vendor/marvell/tools/gtvv4_reinstall.sh -f /tftpboot92/luogy/berlin_generic-ota-eng.sbt.zip  10.37.133.47
+
+无线路由密码：12345ABCDE
+
+1. How to bring up Factory Menu:
+   Under LiveTV ->Tools Menu ->Highlight "Sound mode:xxx" -> press number "1969", -> press F4 Menu key
+   
+2. How to enable/disable Aging mode:
+   a Enter Factory Mode by （Under LiveTV ->Tools Menu ->Highlight "Sound mode:xxx" -> press number "1969"）；
+   b. input command in console: 
+      Enable Aging mode:   #sendevent /dev/input/event0 1 645 1 
+      Disable Aging mode:   #sendevent /dev/input/event0 1 641 0
+
+IR Blaster:In Settings->Video input->Add device manually-> Select Device Type: DVD-> Select Manufacturer->Select Model Number->Select Comand Set->Next
+Dish:In Settings->Video input->"DISH DVR"   Press "menu" key on Dish and select "DISH On Demand"->"My Recordings"
+
+logcat |grep SCMService  验证背光问题抓log的方式
+无线路由web加密无法选择时，需要更换11g\n\b方式。
+LAN口设置里面修改路由器的登陆IP
+
+usb跳线，中间下面4个，右边上面4个，VGA跳线右边下面4个
+Update uboot to BG2-CT GTV4.0,please refer to:http://debutrac.marvell.com/trac/TCL_TV/wiki/GTV4BG2ctSDK#
+
+How to skip OOBE (include Remote Control Paring);
+   #sendevent /dev/input/event0 1 655 1 
+
+The console password for Hisense image is "42K610XWUS3D"
+50K611GWUS
+Hisense update name:  42K611DW_update.zip
+The console password for Hisense image is "berlin"
+PAT ASPECT 1141
+Aging Status is on User Reset 没有作用
+logcat TVCECSrv *:s     Broadcast StandBy
+
+How to skip OOBE(include paring remote control) for Hisense image:
+#sendevent /dev/input/event0 1 655 1 
+data/tombstones
+data/anr
+
+shift+g 到最后
+ESC退出编辑
+shift；wq保存qw属于VM编辑器的
+shift；q退出
+
+bug: http://nbug-01.marvell.com/VIDEO/process_bug.cgi 
+testlink:http://10.37.116.55/testlink/index.php
+bug: http://bugs-05.marvell.com/Hisense/show_bug.cgi?id=1091 
+
+marvellberlin@yahoo.com
+marvell.berlin123456
+echo "00:50:43:01:3C:11" > factory_setting/MAC_ADDR 
+echo "00:50:46:01:35:88" > factory_setting/MAC_ADDR 
+ln -s /mnt/media/usb.2c77-9220 / /tmp/media 
+
+test_Cypress_PLD dump
+test_Cypress_PLD capture
+
+新抓log的命令：
+mount -o rw,remount /system
+cp /mnt/media/usb/ampdiag_android /vendor/bin/
+chmod 777 /vendor/bin/ampdiag_android
+ampdiag_android
+setmodl CLK 255
+setmodl AVS 255
+quit
+logcat -c
+logcat -v time -f /data/log.txt
+
+
+Tips create by Steven.Xu
+
+1. How to run 'adb' cmd in Dos:
+   Put the files (adb.exe,AdbWinApi.dll) to C:\Windows\System32
+
+2. How to run 'ddms' cmd in Dos:
+   You should add ddms folder to PC Environment Variable 'Path'.
+   a. Open Properties of My Computer;
+   b. Open 'Advanced system settigns' ->Advanced -->Enviroment Variables
+   c. In 'System variables', Edit 'Path' variable
+   d. Add you ddms.bat folder to the value, such as add ";D:\Tools\android-sdk-windows\tools"
+   e. You can run 'ddms' cmd now
+
+3. How to using sh shell for Trestles project:
+   #busybox sh     (Then you can using tab key for command)
+   
+4. How to get Source Switching time from logcat(The time is less than actual time):
+   #logcat |busybox grep "SCM_ZAP"
+   
+   D/SCMService(  653): SCM_ZAP SCM_SOURCE_HDMI0   -> SCM_SOURCE_HDMI1   = 3.88 seconds
+   D/SCMService(  653): SCM_ZAP SCM_SOURCE_HDMI1   -> SCM_SOURCE_COMPONENT = 1.93 seconds
+
+5. How to check TV signal Quality(good signal SNR should more than 25):
+   #logcat |grep "SNR"
+   
+6. Console password for MRVL pure image: "berlin"
+   ConSole passowrd for Hisense image: "42K610XWUS3D"
+   
+7. MRVL OTA pure image name: "update.zip"
+   Hisense OTA image name:   "42K611DW_update.zip"
+   
+8. How to skip OOBE (include Remote Control Paring);
+   #sendevent /dev/input/event0 1 655 1 
